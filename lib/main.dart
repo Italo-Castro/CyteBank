@@ -33,7 +33,9 @@ class ListaTransferencia extends StatelessWidget {
 }
 
 class FormularioTransferencia extends StatelessWidget {
-  const FormularioTransferencia({Key? key}) : super(key: key);
+
+  final TextEditingController _controladorCampoNumeroConta = TextEditingController();
+  final TextEditingController _controladorCampoValor = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,7 @@ class FormularioTransferencia extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: TextField(
+                  controller: _controladorCampoNumeroConta,
                   style: TextStyle(
                     fontSize: 16.0
                   ),
@@ -58,17 +61,32 @@ class FormularioTransferencia extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: TextField(
+                  controller: _controladorCampoValor,
                   style: TextStyle(
                     fontSize: 16.0
                   ),
                   decoration: InputDecoration(
                     icon: Icon(Icons.monetization_on),
-                      labelText: 'Número da conta',
+                      labelText: 'Valor',
                       hintText: '00.0'),
                   keyboardType: TextInputType.number,
                 ),
               ),
-              RaisedButton(onPressed: (){},
+              RaisedButton(onPressed: (){
+                debugPrint('Clicou no botão');
+                debugPrint( _controladorCampoNumeroConta.text);
+                debugPrint( "Valor"+_controladorCampoValor.text);
+
+                final int? numeroConta = int.tryParse(_controladorCampoNumeroConta.text);
+                final double? valor = double.tryParse(_controladorCampoValor.text);
+
+                if(numeroConta != null && valor != null) {
+                  final transferenciaCriada = Transferencia(valor, numeroConta);
+                  debugPrint( '$transferenciaCriada');
+                }
+
+
+              },
               child: Text("Confirmar"),)
             ],
           ),
@@ -97,4 +115,9 @@ class Transferencia {
   final int numeroConta;
 
   Transferencia(this.valor, this.numeroConta);
+
+  @override
+  String toString() {
+    return 'Transferencia{valor: $valor, numeroConta: $numeroConta}';
+  }
 }
