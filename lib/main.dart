@@ -16,15 +16,20 @@ class ByteBankApp extends StatelessWidget {
 
 
 class ListaTransferencia extends StatelessWidget {
+  final List<Transferencia> _listaTransferencia = [];
+
   @override
   Widget build(BuildContext context) {
+    _listaTransferencia.add(Transferencia(20.0, 1));
     return Scaffold(
-        body: Column(
-          children: [
-            ItemTransferencia(Transferencia(100, 1)),
-            ItemTransferencia(Transferencia(200, 2)),
-            ItemTransferencia(Transferencia(300, 3)),
-          ],
+        body: ListView.builder(
+          padding: const EdgeInsets.all(9.0),
+          itemCount: _listaTransferencia.length,
+          itemBuilder: (context, indice) {
+            final transferencia = _listaTransferencia[indice];
+            return ItemTransferencia(transferencia);
+          }
+          ,
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -34,6 +39,7 @@ class ListaTransferencia extends StatelessWidget {
             future.then((transferenciaRecebida) {
               debugPrint(' chegou no then do future');
               debugPrint(' $transferenciaRecebida');
+              _listaTransferencia.add(transferenciaRecebida);
             });
           },
           child: Icon(Icons.add),
