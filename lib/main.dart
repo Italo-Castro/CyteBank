@@ -1,3 +1,4 @@
+import 'package:bytebank/screens/login.dart';
 import 'package:bytebank/screens/transferencia/lista.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class ByteBankApp extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
-        home:  ListaTransferencia(),
+        home:  login(),
     );
   }
 }
