@@ -1,3 +1,4 @@
+import 'package:bytebank/screens/transferencia/formulario.dart';
 import 'package:bytebank/screens/transferencia/lista.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,9 @@ import '../components/textUser.dart';
 
 class login extends StatelessWidget {
   final ButtonStyle style = ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
-  final TextField _textUser = TextField();
+  final TextEditingController _controler_TextUser = TextEditingController();
+  final TextEditingController _controler_PassWorld = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold (
@@ -22,18 +25,18 @@ class login extends StatelessWidget {
             Container(
               height: 150,
             ),
-            TextUser(),
+            Editor(_controler_TextUser,'User','',Icons.perm_contact_cal,TextInputType.text, false),
             Container(
               height: 25,
             ),
-            TextPassWorld(),
+            Editor(_controler_PassWorld,'Passworld','',Icons.password,TextInputType.emailAddress, true),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 const SizedBox(height: 30),
                 ElevatedButton(
                   style: style,
-                  onPressed: () =>  ListaTransferencia() /*loginVerify(context)*/,
+                  onPressed: () =>  verifyLogin(context),
                   child: const Text('Entrar'),
                 ),
               ],
@@ -44,19 +47,19 @@ class login extends StatelessWidget {
 
     );
   }
-  void loginVerify(BuildContext context) {
-
-    final TextEditingController _textPassWorld = TextEditingController();
-    final user = _textUser;
-    final passworld = _textPassWorld;
-
-    if (user != null && user == 'italo' && passworld != null && passworld == '123'){
-      debugPrint('Logado');
-    } else {
-      debugPrint('Usuário ou senha invalidos');
+ void verifyLogin (BuildContext context){
+    if (_controler_PassWorld.text == '123' && _controler_TextUser.text == 'Italo'){
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return FormularioTransferencia();
+      }));
+    }else {
+      debugPrint('nao');
     }
-
-  }
-
+ }
+/*
+Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return FormularioTransferencia();
+                  }))
+ */
 }
 

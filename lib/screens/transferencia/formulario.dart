@@ -30,9 +30,9 @@ class FormulrioTransferenciaState extends State<FormularioTransferencia> {
         child: Column(
           children: [
             Editor(_controladorCampoNumeroConta, _rotuloConta, _dicaConta,
-                Icons.work_outlined),
+                Icons.work_outlined, TextInputType.number, false),
             Editor(_controladorCampoValor, _rotuloValor, _dicaValor,
-                Icons.monetization_on),
+                Icons.monetization_on, TextInputType.number, false),
             ElevatedButton(
               onPressed: () => _criaTransferencia(context),
               child: Text(_textoBotaoConfirmar),

@@ -5,8 +5,9 @@ class Editor extends StatelessWidget {
   final String rotulo;
   final String dica;
   final IconData icone;
-
-  Editor(this.controlador, this.rotulo, this.dica, this.icone);
+  final TextInputType typeTextInput;
+  final bool issPasworld;
+  Editor(this.controlador, this.rotulo, this.dica, this.icone, this.typeTextInput, this.issPasworld);
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +16,10 @@ class Editor extends StatelessWidget {
       child: TextField(
         controller: controlador,
         style: TextStyle(fontSize: 16.0),
+        obscureText: issPasworld,
         decoration: InputDecoration(
             icon: Icon(icone), labelText: rotulo, hintText: dica),
-        keyboardType: TextInputType.number,
+        keyboardType: typeTextInput,
       ),
     );
   }
