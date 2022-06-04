@@ -56,10 +56,6 @@ class login extends StatelessWidget {
       debugPrint('nao');
     }
  }
-/*
-Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return FormularioTransferencia();
-                  }))
- */
+
 }
 
